@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AcfAuditApplication {
 
     public static void main(String[] args) {
+
+
         SpringApplication.run(AcfAuditApplication.class, args);
+
+        System.out.println("Coucou");
     }
 
 }
