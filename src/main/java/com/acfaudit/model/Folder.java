@@ -1,21 +1,33 @@
 package com.acfaudit.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
+import com.acfaudit.model.Client;
 
 @Entity
 public class Folder {
-    private int id;
-    private Date folderLastModificationDate;
-    private String folderPath;
-    private int clientId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    private int id;
+
+    @Basic
+    @Column(name = "folderLastModificationDate")
+    private Date folderLastModificationDate;
+
+    @Basic
+    @Column(name = "folderPath")
+    private String folderPath;
+
+    @OneToOne(mappedBy = "folder")
+    private Client client;
+
+    @ManyToMany(mappedBy = "folderList")
+    private List<Collaborater> collaboraterList;
+
     public int getId() {
         return id;
     }
@@ -24,8 +36,6 @@ public class Folder {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "folderLastModificationDate")
     public Date getFolderLastModificationDate() {
         return folderLastModificationDate;
     }
@@ -34,8 +44,6 @@ public class Folder {
         this.folderLastModificationDate = folderLastModificationDate;
     }
 
-    @Basic
-    @Column(name = "folderPath")
     public String getFolderPath() {
         return folderPath;
     }
@@ -44,14 +52,20 @@ public class Folder {
         this.folderPath = folderPath;
     }
 
-    @Basic
-    @Column(name = "clientId")
-    public int getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Collaborater> getCollaboraterList() {
+        return collaboraterList;
+    }
+
+    public void setCollaboraterList(List<Collaborater> collaboraterList) {
+        this.collaboraterList = collaboraterList;
     }
 
     @Override
@@ -59,11 +73,11 @@ public class Folder {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Folder folder = (Folder) o;
-        return id == folder.id && clientId == folder.clientId && Objects.equals(folderLastModificationDate, folder.folderLastModificationDate) && Objects.equals(folderPath, folder.folderPath);
+        return id == folder.id && folderLastModificationDate.equals(folder.folderLastModificationDate) && folderPath.equals(folder.folderPath) && client.equals(folder.client) && collaboraterList.equals(folder.collaboraterList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, folderLastModificationDate, folderPath, clientId);
+        return Objects.hash(id, folderLastModificationDate, folderPath, client, collaboraterList);
     }
 }

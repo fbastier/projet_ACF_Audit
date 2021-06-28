@@ -1,21 +1,43 @@
 package com.acfaudit.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Client {
-    private int id;
-    private String clientFirstName;
-    private String clientSurName;
-    private String clientEmail;
-    private int folderId;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    private int id;
+
+    @Basic
+    @Column(name = "clientFirstName")
+    private String clientFirstName;
+
+    @Basic
+    @Column(name = "clientSurName")
+    private String clientSurName;
+
+    @Basic
+    @Column(name = "clientEmail")
+    private String clientEmail;
+
+    @OneToMany(mappedBy = "client")
+    private List<Message> messageList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "folder_id", referencedColumnName = "id")
+    private Folder folder;
+
+    @ManyToMany
+    @JoinTable (
+            name = "collaborater_client",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "collaborater_id")
+    )
+    private List<Collaborater> collaboraterList;
+
     public int getId() {
         return id;
     }
@@ -24,8 +46,6 @@ public class Client {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "clientFirstName")
     public String getClientFirstName() {
         return clientFirstName;
     }
@@ -34,8 +54,6 @@ public class Client {
         this.clientFirstName = clientFirstName;
     }
 
-    @Basic
-    @Column(name = "clientSurName")
     public String getClientSurName() {
         return clientSurName;
     }
@@ -44,8 +62,6 @@ public class Client {
         this.clientSurName = clientSurName;
     }
 
-    @Basic
-    @Column(name = "clientEmail")
     public String getClientEmail() {
         return clientEmail;
     }
@@ -54,14 +70,28 @@ public class Client {
         this.clientEmail = clientEmail;
     }
 
-    @Basic
-    @Column(name = "folderId")
-    public int getFolderId() {
-        return folderId;
+    public List<Message> getMessageList() {
+        return messageList;
     }
 
-    public void setFolderId(int folderId) {
-        this.folderId = folderId;
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
+    }
+
+    public List<Collaborater> getCollaboraterList() {
+        return collaboraterList;
+    }
+
+    public void setCollaboraterList(List<Collaborater> collaboraterList) {
+        this.collaboraterList = collaboraterList;
     }
 
     @Override
@@ -69,11 +99,11 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id == client.id && folderId == client.folderId && Objects.equals(clientFirstName, client.clientFirstName) && Objects.equals(clientSurName, client.clientSurName) && Objects.equals(clientEmail, client.clientEmail);
+        return id == client.id && clientFirstName.equals(client.clientFirstName) && clientSurName.equals(client.clientSurName) && clientEmail.equals(client.clientEmail) && messageList.equals(client.messageList) && folder.equals(client.folder) && collaboraterList.equals(client.collaboraterList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientFirstName, clientSurName, clientEmail, folderId);
+        return Objects.hash(id, clientFirstName, clientSurName, clientEmail, messageList, folder, collaboraterList);
     }
 }

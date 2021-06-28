@@ -1,23 +1,36 @@
 package com.acfaudit.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Basic
+    @Column(name = "messageContext")
     private String messageContext;
+
+    @Basic
+    @Column(name = "messageTimeStamp")
     private Date messageTimeStamp;
-    private int clientId;
-    private int collaboraterId;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "collaborater_id", nullable = false)
+    private Collaborater collaborater;
+
+    @Basic
+    @Column(name = "messageClientIsWriter")
     private byte messageClientIsWriter;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,8 +39,6 @@ public class Message {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "messageContext")
     public String getMessageContext() {
         return messageContext;
     }
@@ -36,8 +47,6 @@ public class Message {
         this.messageContext = messageContext;
     }
 
-    @Basic
-    @Column(name = "messageTimeStamp")
     public Date getMessageTimeStamp() {
         return messageTimeStamp;
     }
@@ -46,28 +55,22 @@ public class Message {
         this.messageTimeStamp = messageTimeStamp;
     }
 
-    @Basic
-    @Column(name = "clientId")
-    public int getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    @Basic
-    @Column(name = "collaboraterId")
-    public int getCollaboraterId() {
-        return collaboraterId;
+    public Collaborater getCollaborater() {
+        return collaborater;
     }
 
-    public void setCollaboraterId(int collaboraterId) {
-        this.collaboraterId = collaboraterId;
+    public void setCollaborater(Collaborater collaborater) {
+        this.collaborater = collaborater;
     }
 
-    @Basic
-    @Column(name = "messageClientIsWriter")
     public byte getMessageClientIsWriter() {
         return messageClientIsWriter;
     }
@@ -81,11 +84,11 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return id == message.id && clientId == message.clientId && collaboraterId == message.collaboraterId && messageClientIsWriter == message.messageClientIsWriter && Objects.equals(messageContext, message.messageContext) && Objects.equals(messageTimeStamp, message.messageTimeStamp);
+        return id == message.id && messageClientIsWriter == message.messageClientIsWriter && messageContext.equals(message.messageContext) && messageTimeStamp.equals(message.messageTimeStamp) && client.equals(message.client) && collaborater.equals(message.collaborater);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, messageContext, messageTimeStamp, clientId, collaboraterId, messageClientIsWriter);
+        return Objects.hash(id, messageContext, messageTimeStamp, client, collaborater, messageClientIsWriter);
     }
 }
