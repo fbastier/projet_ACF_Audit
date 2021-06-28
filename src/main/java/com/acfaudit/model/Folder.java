@@ -80,4 +80,16 @@ public class Folder {
     public int hashCode() {
         return Objects.hash(id, folderLastModificationDate, folderPath, client, collaboraterList);
     }
+
+    @Override
+    public String toString() {
+        return "Folder{" +
+                "id=" + id +
+                ", folderLastModificationDate=" + folderLastModificationDate +
+                ", folderPath='" + folderPath + '\'' +
+                ", client=" + client +
+                ", collaboraterList=" + collaboraterList +
+                '}';
+    }
+
 }

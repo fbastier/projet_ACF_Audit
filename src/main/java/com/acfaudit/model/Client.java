@@ -106,4 +106,17 @@ public class Client {
     public int hashCode() {
         return Objects.hash(id, clientFirstName, clientSurName, clientEmail, messageList, folder, collaboraterList);
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", clientFirstName='" + clientFirstName + '\'' +
+                ", clientSurName='" + clientSurName + '\'' +
+                ", clientEmail='" + clientEmail + '\'' +
+                ", messageList=" + messageList +
+                ", folder=" + folder +
+                ", collaboraterList=" + collaboraterList +
+                '}';
+    }
 }

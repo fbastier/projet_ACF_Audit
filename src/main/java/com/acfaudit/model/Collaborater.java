@@ -107,4 +107,17 @@ public class Collaborater {
     public int hashCode() {
         return Objects.hash(id, collaboraterFirstName, collaboraterSurName, collaboraterEmail, clientList, messageList, folderList);
     }
+
+    @Override
+    public String toString() {
+        return "Collaborater{" +
+                "id=" + id +
+                ", collaboraterFirstName='" + collaboraterFirstName + '\'' +
+                ", collaboraterSurName='" + collaboraterSurName + '\'' +
+                ", collaboraterEmail='" + collaboraterEmail + '\'' +
+                ", clientList=" + clientList +
+                ", messageList=" + messageList +
+                ", folderList=" + folderList +
+                '}';
+    }
 }
