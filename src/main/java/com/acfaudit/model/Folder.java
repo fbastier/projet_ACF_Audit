@@ -28,6 +28,12 @@ public class Folder {
     @ManyToMany(mappedBy = "folderList")
     private List<Collaborater> collaboraterList;
 
+    @OneToMany (mappedBy = "folder")
+    private List<Document> documentList;
+
+    @OneToMany (mappedBy = "folder")
+    private List<Event> eventList;
+
     public int getId() {
         return id;
     }
@@ -68,28 +74,32 @@ public class Folder {
         this.collaboraterList = collaboraterList;
     }
 
+    public List<Document> getDocumentList() {
+        return documentList;
+    }
+
+    public void setDocumentList(List<Document> documentList) {
+        this.documentList = documentList;
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Folder folder = (Folder) o;
-        return id == folder.id && folderLastModificationDate.equals(folder.folderLastModificationDate) && folderPath.equals(folder.folderPath) && client.equals(folder.client) && collaboraterList.equals(folder.collaboraterList);
+        return id == folder.id && folderLastModificationDate.equals(folder.folderLastModificationDate) && folderPath.equals(folder.folderPath) && client.equals(folder.client) && collaboraterList.equals(folder.collaboraterList) && documentList.equals(folder.documentList) && eventList.equals(folder.eventList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, folderLastModificationDate, folderPath, client, collaboraterList);
+        return Objects.hash(id, folderLastModificationDate, folderPath, client, collaboraterList, documentList, eventList);
     }
-
-    @Override
-    public String toString() {
-        return "Folder{" +
-                "id=" + id +
-                ", folderLastModificationDate=" + folderLastModificationDate +
-                ", folderPath='" + folderPath + '\'' +
-                ", client=" + client +
-                ", collaboraterList=" + collaboraterList +
-                '}';
-    }
-
 }

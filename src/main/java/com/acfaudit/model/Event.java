@@ -1,22 +1,35 @@
 package com.acfaudit.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Event {
-    private int id;
-    private Date eventDate;
-    private String eventTextContent;
-    private int folderId;
-    private Integer documentId;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    private int id;
+    @Basic
+    @Column(name = "eventDate")
+    private Date eventDate;
+    @Basic
+    @Column(name = "eventTextContent")
+    private String eventTextContent;
+
+    @ManyToOne
+    @JoinColumn(name = "folder_id", nullable = false)
+    private Folder folder;
+
+    @ManyToMany
+    @JoinTable (
+            name = "document_event",
+            joinColumns = @JoinColumn(name = "document_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Document> documentList;
+
     public int getId() {
         return id;
     }
@@ -25,8 +38,6 @@ public class Event {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "eventDate")
     public Date getEventDate() {
         return eventDate;
     }
@@ -35,8 +46,6 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    @Basic
-    @Column(name = "eventTextContent")
     public String getEventTextContent() {
         return eventTextContent;
     }
@@ -45,24 +54,20 @@ public class Event {
         this.eventTextContent = eventTextContent;
     }
 
-    @Basic
-    @Column(name = "folderId")
-    public int getFolderId() {
-        return folderId;
+    public Folder getFolder() {
+        return folder;
     }
 
-    public void setFolderId(int folderId) {
-        this.folderId = folderId;
+    public void setFolder(Folder folder) {
+        this.folder = folder;
     }
 
-    @Basic
-    @Column(name = "documentId")
-    public Integer getDocumentId() {
-        return documentId;
+    public List<Document> getDocumentList() {
+        return documentList;
     }
 
-    public void setDocumentId(Integer documentId) {
-        this.documentId = documentId;
+    public void setDocumentList(List<Document> documentList) {
+        this.documentList = documentList;
     }
 
     @Override
@@ -70,11 +75,11 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return id == event.id && folderId == event.folderId && Objects.equals(eventDate, event.eventDate) && Objects.equals(eventTextContent, event.eventTextContent) && Objects.equals(documentId, event.documentId);
+        return id == event.id && eventDate.equals(event.eventDate) && eventTextContent.equals(event.eventTextContent) && folder.equals(event.folder) && documentList.equals(event.documentList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, eventDate, eventTextContent, folderId, documentId);
+        return Objects.hash(id, eventDate, eventTextContent, folder, documentList);
     }
 }

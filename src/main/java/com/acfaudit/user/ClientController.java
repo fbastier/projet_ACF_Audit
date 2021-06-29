@@ -1,5 +1,6 @@
 package com.acfaudit.user;
 
+import com.acfaudit.dto.ClientResponse;
 import com.acfaudit.dto.CreateClient;
 import com.acfaudit.folder.FolderRepository;
 import com.acfaudit.model.Client;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,8 +77,21 @@ public class ClientController {
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<Client> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return clientRepository.findAll();
+    public @ResponseBody List<ClientResponse> getAllClients() {
+        // This returns a JSON or XML with the clients;
+
+        List<ClientResponse> clientResponseList = new ArrayList<ClientResponse>();
+        Iterable<Client> clientIterable = clientRepository.findAll();
+
+       for (Client cl : clientIterable) {
+            ClientResponse clientResponse = new ClientResponse();
+            clientResponse.setId(cl.getId());
+            clientResponse.setFirstName(cl.getClientFirstName());
+            clientResponse.setSurName(cl.getClientSurName());
+            clientResponse.setEmail(cl.getClientEmail());
+            clientResponse.setFolder(cl.getFolder().getId());
+            clientResponseList.add(clientResponse);
+        }
+        return clientResponseList;
     }
 }

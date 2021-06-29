@@ -1,23 +1,38 @@
 package com.acfaudit.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Document {
-    private int id;
-    private String documentName;
-    private Date documentLastModificationDate;
-    private Date documentUpLoadDate;
-    private String documentPath;
-    private String documentMessage;
-
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    private int id;
+    @Basic
+    @Column(name = "documentName")
+    private String documentName;
+    @Basic
+    @Column(name = "documentLastModificationDate")
+    private Date documentLastModificationDate;
+    @Basic
+    @Column(name = "documentUpLoadDate")
+    private Date documentUpLoadDate;
+    @Basic
+    @Column(name = "documentPath")
+    private String documentPath;
+    @Basic
+    @Column(name = "documentMessage")
+    private String documentMessage;
+    @ManyToOne
+    @JoinColumn(name = "folder_id", nullable = false)
+    private Folder folder;
+    @ManyToMany (mappedBy = "documentList")
+    private List<Event> eventList;
+
+
     public int getId() {
         return id;
     }
@@ -26,8 +41,6 @@ public class Document {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "documentName")
     public String getDocumentName() {
         return documentName;
     }
@@ -36,8 +49,6 @@ public class Document {
         this.documentName = documentName;
     }
 
-    @Basic
-    @Column(name = "documentLastModificationDate")
     public Date getDocumentLastModificationDate() {
         return documentLastModificationDate;
     }
@@ -46,8 +57,6 @@ public class Document {
         this.documentLastModificationDate = documentLastModificationDate;
     }
 
-    @Basic
-    @Column(name = "documentUpLoadDate")
     public Date getDocumentUpLoadDate() {
         return documentUpLoadDate;
     }
@@ -56,8 +65,6 @@ public class Document {
         this.documentUpLoadDate = documentUpLoadDate;
     }
 
-    @Basic
-    @Column(name = "documentPath")
     public String getDocumentPath() {
         return documentPath;
     }
@@ -66,8 +73,6 @@ public class Document {
         this.documentPath = documentPath;
     }
 
-    @Basic
-    @Column(name = "documentMessage")
     public String getDocumentMessage() {
         return documentMessage;
     }
@@ -76,16 +81,24 @@ public class Document {
         this.documentMessage = documentMessage;
     }
 
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Document document = (Document) o;
-        return id == document.id && Objects.equals(documentName, document.documentName) && Objects.equals(documentLastModificationDate, document.documentLastModificationDate) && Objects.equals(documentUpLoadDate, document.documentUpLoadDate) && Objects.equals(documentPath, document.documentPath) && Objects.equals(documentMessage, document.documentMessage);
+        return id == document.id && documentName.equals(document.documentName) && documentLastModificationDate.equals(document.documentLastModificationDate) && documentUpLoadDate.equals(document.documentUpLoadDate) && documentPath.equals(document.documentPath) && documentMessage.equals(document.documentMessage) && folder.equals(document.folder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, documentName, documentLastModificationDate, documentUpLoadDate, documentPath, documentMessage);
+        return Objects.hash(id, documentName, documentLastModificationDate, documentUpLoadDate, documentPath, documentMessage, folder);
     }
 }
