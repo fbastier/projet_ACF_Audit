@@ -1,36 +1,20 @@
-package com.acfaudit.model;
+package com.acfaudit.dto;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDate;
+
+import com.acfaudit.model.Client;
+import com.acfaudit.model.Collaborater;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class CreateMessage {
     private int id;
-
-    @Basic
-    @Column(name = "messageContext")
     private String messageContext;
-
-    @Basic
-    @Column(name = "messageTimeStamp")
     private LocalDateTime messageTimeStamp;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
-
-    @ManyToOne
-    @JoinColumn(name = "collaborater_id", nullable = false)
     private Collaborater collaborater;
-
-    @Basic
-    @Column(name = "messageClientIsWriter")
     private boolean messageClientIsWriter;
 
     public int getId() {
@@ -77,7 +61,7 @@ public class Message {
         return messageClientIsWriter;
     }
 
-    public void setMessageClientIsWriter(Boolean messageClientIsWriter) {
+    public void setMessageClientIsWriter(boolean messageClientIsWriter) {
         this.messageClientIsWriter = messageClientIsWriter;
     }
 
@@ -85,7 +69,7 @@ public class Message {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Message message = (Message) o;
+        CreateMessage message = (CreateMessage) o;
         return id == message.id && messageClientIsWriter == message.messageClientIsWriter && messageContext.equals(message.messageContext) && messageTimeStamp.equals(message.messageTimeStamp) && client.equals(message.client) && collaborater.equals(message.collaborater);
     }
 
