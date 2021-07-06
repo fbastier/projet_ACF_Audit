@@ -83,6 +83,15 @@ public class ClientController {
         List<ClientResponse> clientResponseList = new ArrayList<ClientResponse>();
         Iterable<Client> clientIterable = clientRepository.findAll();
 
+        // Initialize a list of collaboraters to null
+        /*List<Collaborater> oneCollaboraterList = new ArrayList<Collaborater>();
+        for ( Collaborater coll : cl.getCollaboraterList()
+        ) {
+            oneCollaboraterList.add(coll);
+        }
+        */
+
+        // TODO : finish
        for (Client cl : clientIterable) {
             ClientResponse clientResponse = new ClientResponse();
             clientResponse.setId(cl.getId());
@@ -90,6 +99,8 @@ public class ClientController {
             clientResponse.setSurName(cl.getClientSurName());
             clientResponse.setEmail(cl.getClientEmail());
             clientResponse.setFolder(cl.getFolder().getId());
+            clientResponse.setCollaboraterList(new ArrayList<>());
+            clientResponse.setMessageList(new ArrayList<>());
             clientResponseList.add(clientResponse);
         }
         return clientResponseList;

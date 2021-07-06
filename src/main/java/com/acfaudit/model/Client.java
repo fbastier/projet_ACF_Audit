@@ -38,6 +38,32 @@ public class Client {
     )
     private List<Collaborater> collaboraterList;
 
+    @Basic
+    @Column(name = "active")
+    private boolean active;
+
+    @Basic
+    @Column(name = "roles")
+    private String roles;
+
+
+    @Basic
+    @Column(name = "password")
+    private String password;
+
+    public Client() {
+
+    }
+
+    // NEEDED FOR AUTHENTICATION CONSTRUCTOR
+    public Client(int id, String clientFirstName, String clientEmail, boolean active, String roles) {
+        this.id = id;
+        this.clientFirstName = clientFirstName;
+        this.clientEmail = clientEmail;
+        this.active = active;
+        this.roles = roles;
+    }
+
     public int getId() {
         return id;
     }
@@ -94,6 +120,30 @@ public class Client {
         this.collaboraterList = collaboraterList;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,7 +157,7 @@ public class Client {
         return Objects.hash(id, clientFirstName, clientSurName, clientEmail, messageList, folder, collaboraterList);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
@@ -118,5 +168,5 @@ public class Client {
                 ", folder=" + folder +
                 ", collaboraterList=" + collaboraterList +
                 '}';
-    }
+    }*/
 }
