@@ -31,6 +31,17 @@ public class Message {
     @Column(name = "messageClientIsWriter")
     private byte messageClientIsWriter;
 
+    public Message() {
+    }
+
+    public Message(String messageContext, Date messageTimeStamp, Client client, Collaborater collaborater, byte messageClientIsWriter) {
+        this.messageContext = messageContext;
+        this.messageTimeStamp = messageTimeStamp;
+        this.client = client;
+        this.collaborater = collaborater;
+        this.messageClientIsWriter = messageClientIsWriter;
+    }
+
     public int getId() {
         return id;
     }

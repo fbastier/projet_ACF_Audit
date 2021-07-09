@@ -1,11 +1,13 @@
 package com.acfaudit.model;
 
+import com.acfaudit.user.UserInterface;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Client {
+public class Client implements UserInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
