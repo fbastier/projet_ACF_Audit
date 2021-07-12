@@ -3,7 +3,6 @@ package com.acfaudit.dto;
 import com.acfaudit.model.Event;
 import com.acfaudit.model.Folder;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 

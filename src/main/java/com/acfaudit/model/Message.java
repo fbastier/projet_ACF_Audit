@@ -1,9 +1,7 @@
 package com.acfaudit.model;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity

@@ -4,7 +4,6 @@ import com.acfaudit.model.Client;
 import com.acfaudit.model.Collaborater;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.time.Instant;
 
 // Data Transfer Object for creating messages
