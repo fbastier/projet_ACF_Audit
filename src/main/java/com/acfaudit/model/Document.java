@@ -2,6 +2,7 @@ package com.acfaudit.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,10 +17,10 @@ public class Document {
     private String documentName;
     @Basic
     @Column(name = "documentLastModificationDate")
-    private Date documentLastModificationDate;
+    private LocalDateTime documentLastModificationDate;
     @Basic
     @Column(name = "documentUpLoadDate")
-    private Date documentUpLoadDate;
+    private LocalDateTime documentUploadDate;
     @Basic
     @Column(name = "documentPath")
     private String documentPath;
@@ -49,20 +50,20 @@ public class Document {
         this.documentName = documentName;
     }
 
-    public Date getDocumentLastModificationDate() {
+    public LocalDateTime getDocumentLastModificationDate() {
         return documentLastModificationDate;
     }
 
-    public void setDocumentLastModificationDate(Date documentLastModificationDate) {
+    public void setDocumentLastModificationDate(LocalDateTime documentLastModificationDate) {
         this.documentLastModificationDate = documentLastModificationDate;
     }
 
-    public Date getDocumentUpLoadDate() {
-        return documentUpLoadDate;
+    public LocalDateTime getDocumentUpLoadDate() {
+        return documentUploadDate;
     }
 
-    public void setDocumentUpLoadDate(Date documentUpLoadDate) {
-        this.documentUpLoadDate = documentUpLoadDate;
+    public void setDocumentUpLoadDate(LocalDateTime documentUpLoadDate) {
+        this.documentUploadDate = documentUpLoadDate;
     }
 
     public String getDocumentPath() {
@@ -94,11 +95,11 @@ public class Document {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Document document = (Document) o;
-        return id == document.id && documentName.equals(document.documentName) && documentLastModificationDate.equals(document.documentLastModificationDate) && documentUpLoadDate.equals(document.documentUpLoadDate) && documentPath.equals(document.documentPath) && documentMessage.equals(document.documentMessage) && folder.equals(document.folder);
+        return id == document.id && documentName.equals(document.documentName) && documentLastModificationDate.equals(document.documentLastModificationDate) && documentUploadDate.equals(document.documentUploadDate) && documentPath.equals(document.documentPath) && documentMessage.equals(document.documentMessage) && folder.equals(document.folder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, documentName, documentLastModificationDate, documentUpLoadDate, documentPath, documentMessage, folder);
+        return Objects.hash(id, documentName, documentLastModificationDate, documentUploadDate, documentPath, documentMessage, folder);
     }
 }

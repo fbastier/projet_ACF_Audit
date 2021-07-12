@@ -2,6 +2,8 @@ package com.acfaudit.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +19,7 @@ public class Message {
 
     @Basic
     @Column(name = "messageTimeStamp")
-    private Date messageTimeStamp;
+    private Instant messageTimeStamp;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
@@ -34,7 +36,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(String messageContext, Date messageTimeStamp, Client client, Collaborater collaborater, byte messageClientIsWriter) {
+    public Message(String messageContext, Instant messageTimeStamp, Client client, Collaborater collaborater, byte messageClientIsWriter) {
         this.messageContext = messageContext;
         this.messageTimeStamp = messageTimeStamp;
         this.client = client;
@@ -58,11 +60,11 @@ public class Message {
         this.messageContext = messageContext;
     }
 
-    public Date getMessageTimeStamp() {
+    public Instant getMessageTimeStamp() {
         return messageTimeStamp;
     }
 
-    public void setMessageTimeStamp(Date messageTimeStamp) {
+    public void setMessageTimeStamp(Instant messageTimeStamp) {
         this.messageTimeStamp = messageTimeStamp;
     }
 

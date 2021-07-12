@@ -5,11 +5,12 @@ import com.acfaudit.model.Folder;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CreateEvent {
     private int id;
-    private Date eventDate;
+    private LocalDateTime eventDate;
     private String eventTextContent;
     private Folder folder;
     private List<Document> documentList;
@@ -22,11 +23,11 @@ public class CreateEvent {
         this.id = id;
     }
 
-    public Date getEventDate() {
+    public LocalDateTime getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(LocalDateTime eventDate) {
         this.eventDate = eventDate;
     }
 

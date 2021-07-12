@@ -5,12 +5,13 @@ import com.acfaudit.model.Collaborater;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.time.Instant;
 
 // Data Transfer Object for creating messages
 @Component
 public class MessageCreate {
     private String messageContext;
-    private Date messageTimeStamp;
+    private Instant messageTimeStamp;
     private Client client;
     private Collaborater collaborater;
     private byte messageClientIsWriter;
@@ -23,12 +24,12 @@ public class MessageCreate {
         this.messageContext = messageContext;
     }
 
-    public Date getMessageTimeStamp() {
+    public Instant getMessageTimeStamp() {
         return messageTimeStamp;
     }
 
-    public void setMessageTimeStamp(Date messageTimeStamp) {
-        this.messageTimeStamp = messageTimeStamp;
+    public void setMessageTimeStamp(Instant instant) {
+        this.messageTimeStamp = instant;
     }
 
     public Client getClient() {

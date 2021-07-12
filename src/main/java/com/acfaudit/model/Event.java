@@ -2,6 +2,7 @@ package com.acfaudit.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class Event {
     private int id;
     @Basic
     @Column(name = "eventDate")
-    private Date eventDate;
+    private LocalDateTime eventDate;
     @Basic
     @Column(name = "eventTextContent")
     private String eventTextContent;
@@ -38,11 +39,11 @@ public class Event {
         this.id = id;
     }
 
-    public Date getEventDate() {
+    public LocalDateTime getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(LocalDateTime eventDate) {
         this.eventDate = eventDate;
     }
 

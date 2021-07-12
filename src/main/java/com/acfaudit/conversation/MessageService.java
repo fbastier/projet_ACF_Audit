@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.Instant;
 
 
 @Service
@@ -26,8 +27,7 @@ public class MessageService {
         messageCreate.setMessageContext(messageContext);
         // Set timestamp - sql date needs milliseconds timestamp to perform instanciation
         long timestamp = System.currentTimeMillis();
-        Date messageTimeStamp = new java.sql.Date(timestamp);
-        messageCreate.setMessageTimeStamp(messageTimeStamp);
+        messageCreate.setMessageTimeStamp(Instant.now());
         // Set client
         messageCreate.setClient((Client)client);
         //Set collaborater
