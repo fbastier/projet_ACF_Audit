@@ -34,6 +34,7 @@ public class ClientController {
 
 
     @GetMapping(path="/all")
+    @CrossOrigin(value = "localhost:4200/client-list")
     public @ResponseBody List<FindClient> getAllClients() {
         clientService.findAll();
 
@@ -44,4 +45,5 @@ public class ClientController {
 
         return findClients;
     }
+
 }
