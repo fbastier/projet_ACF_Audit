@@ -35,7 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @Controller
-@CrossOrigin("http://localhost:8081/document")
+@RequestMapping(path="/document")
+@CrossOrigin("http://localhost:4200/")
 public class DocumentController {
 
   @Autowired

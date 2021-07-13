@@ -24,7 +24,7 @@ public class JPASecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/client/*").hasRole("USER")
+                //.antMatchers("/client/*").hasRole("USER")
                 .antMatchers("/").permitAll()
                 .and().formLogin();
     }
