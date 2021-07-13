@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 @SpringBootApplication
 //@EnableJpaRepositories(basePackageClasses = ClientRepository.class)
-public class AcfAuditApplication implements CommandLineRunner {
+public class AcfAuditApplication implements CommandLineRunner{
 	
 	@Resource
 	StorageService storageService;

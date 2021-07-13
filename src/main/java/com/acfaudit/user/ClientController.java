@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path="/client")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ClientController {
 
 
