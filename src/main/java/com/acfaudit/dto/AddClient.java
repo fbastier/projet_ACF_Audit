@@ -1,6 +1,6 @@
 package com.acfaudit.dto;
 
-public class CreateClient {
+public class AddClient {
     private String firstName;
     private String surName;
     private String email;

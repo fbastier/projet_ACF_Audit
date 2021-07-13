@@ -5,14 +5,25 @@ import com.acfaudit.model.Message;
 
 import java.util.List;
 
-public class ClientResponse {
+public class FindClient {
     private int id;
     private String firstName;
     private String surName;
     private String email;
     private int folder;
-    private List<Collaborater> collaboraterList;
-    private List<Message> messageList;
+    private List<FindCollaborater> collaboraterList;
+
+    public FindClient() {
+    }
+
+    public FindClient(int id, String firstName, String surName, String email, int folder, List<FindCollaborater> collaboraterList) {
+        this.id = id;
+        this.firstName = firstName;
+        this.surName = surName;
+        this.email = email;
+        this.folder = folder;
+        this.collaboraterList = collaboraterList;
+    }
 
     public int getId() {
         return id;
@@ -54,19 +65,12 @@ public class ClientResponse {
         this.folder = folder;
     }
 
-    public List<Collaborater> getCollaboraterList() {
+    public List<FindCollaborater> getCollaboraterList() {
         return collaboraterList;
     }
 
-    public void setCollaboraterList(List<Collaborater> collaboraterList) {
+    public void setCollaboraterList(List<FindCollaborater> collaboraterList) {
         this.collaboraterList = collaboraterList;
     }
 
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
 }

@@ -1,19 +1,14 @@
 package com.acfaudit.calendar;
 
-import com.acfaudit.dto.CreateClient;
 import com.acfaudit.dto.CreateEvent;
 import com.acfaudit.folder.FolderRepository;
 import com.acfaudit.model.Client;
-import com.acfaudit.model.Collaborater;
 import com.acfaudit.model.Event;
 import com.acfaudit.model.Folder;
 import com.acfaudit.user.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/calendrier")
