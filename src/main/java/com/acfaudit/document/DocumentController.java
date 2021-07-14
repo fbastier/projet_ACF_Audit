@@ -36,7 +36,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 @Controller
 @RequestMapping(path="/document")
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("http://localhost:4200")
 public class DocumentController {
 
   @Autowired
