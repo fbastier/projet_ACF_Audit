@@ -35,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(Client client) {
         this.id = client.getId();
         this.clientFirstName = client.getClientFirstName();
-        this.clientEmail = client.getClientEmail();
+        this.clientEmail = client.getEmail();
         this.active = client.isActive();
         this.authorities = Arrays.stream(client.getRoles().split(","))
                         .map(SimpleGrantedAuthority::new)
@@ -43,7 +43,29 @@ public class UserDetailsImpl implements UserDetails {
         this.password = client.getPassword();
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

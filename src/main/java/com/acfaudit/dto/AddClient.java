@@ -3,7 +3,7 @@ package com.acfaudit.dto;
 public class AddClient {
     private String firstName;
     private String surName;
-    private String email;
+    private String clientEmail;
 
     public String getFirstName() {
         return firstName;
@@ -21,11 +21,11 @@ public class AddClient {
         this.surName = surName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClientEmail() {
+        return clientEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
     }
 }
