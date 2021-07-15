@@ -5,18 +5,29 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.spi.FileTypeDetector;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.stream.Stream;
 
+import com.acfaudit.dto.AddDocument;
+import com.acfaudit.model.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
+import org.springframework.util.MimeType;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class StorageServiceImpl implements StorageService {
 
   private final Path root = Paths.get("uploads");
+
+  @Autowired
+  DocumentService documentService;
 
   @Override
   public void init() {
@@ -30,10 +41,26 @@ public class StorageServiceImpl implements StorageService {
   @Override
   public void save(MultipartFile file) {
     try {
-      Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+      String fileName = file.getOriginalFilename();
+      Long timestamp = Instant.now().getEpochSecond();
+      Long memorySize = Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+      String path = PathService.buildPath(fileName, timestamp, memorySize);
+      saveInDB(fileName, path);
+
     } catch (Exception e) {
       throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
     }
+  }
+
+  public AddDocument saveInDB(String fileName, String path) {
+    AddDocument addDocument = new AddDocument();
+    try {
+      addDocument = documentService.save(fileName, path);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return addDocument;
   }
 
   @Override

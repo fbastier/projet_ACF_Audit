@@ -20,6 +20,10 @@ public class FindFolder {
     public FindFolder() {
     }
 
+    public FindFolder(int id) {
+        this.id = id;
+    }
+
     public FindFolder(int id, Date folderLastModificationDate, String folderPath, FindClient client, List<FindCollaborater> collaboraterList) {
         this.id = id;
         this.folderLastModificationDate = folderLastModificationDate;

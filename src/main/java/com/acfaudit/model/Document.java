@@ -32,6 +32,14 @@ public class Document {
     @ManyToMany (mappedBy = "documentList")
     private List<Event> eventList;
 
+    public Document() {
+    }
+
+    public Document(String documentName, String documentPath, Folder folder) {
+        this.documentName = documentName;
+        this.documentPath = documentPath;
+        this.folder = folder;
+    }
 
     public int getId() {
         return id;
