@@ -118,4 +118,10 @@ public class ClientService {
 
         return client;
     }
+
+    public Client findByUsername(String username) {
+        Client client = clientRepository.findByUsername(username);
+
+        return client;
+    }
 }

@@ -14,6 +14,10 @@ public class Client implements UserInterface {
     private int id;
 
     @Basic
+    @Column(name = "username")
+    private String username;
+
+    @Basic
     @Column(name = "clientFirstName")
     private String clientFirstName;
 

@@ -1,8 +1,9 @@
-package com.acfaudit;
+package com.acfaudit.security.services;
 
 import com.acfaudit.model.Client;
 import com.acfaudit.model.Folder;
 import com.acfaudit.model.Message;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class JPAClientUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private int id;
     private String clientFirstName;
@@ -20,15 +22,17 @@ public class JPAClientUserDetails implements UserDetails {
     private String clientEmail;
     private List<Message> messageList;
     private Folder folder;
+
+    @JsonIgnore
     private String password;
+
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public JPAClientUserDetails() {
-
+    public UserDetailsImpl() {
     }
 
-    public JPAClientUserDetails(Client client) {
+    public UserDetailsImpl(Client client) {
         this.id = client.getId();
         this.clientFirstName = client.getClientFirstName();
         this.clientEmail = client.getClientEmail();
@@ -39,11 +43,15 @@ public class JPAClientUserDetails implements UserDetails {
         this.password = client.getPassword();
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println("debug JPAClientUserDetails in getAuthorities() : ");
-        //System.out.println(authorities);
         return authorities;
+    }
+
+    public static UserDetailsImpl build(Client client) {
+        return new UserDetailsImpl(client);
     }
 
     @Override
@@ -76,5 +84,16 @@ public class JPAClientUserDetails implements UserDetails {
         return active;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDetailsImpl that = (UserDetailsImpl) o;
+        return id == that.id && active == that.active && Objects.equals(clientFirstName, that.clientFirstName) && Objects.equals(clientSurName, that.clientSurName) && clientEmail.equals(that.clientEmail) && Objects.equals(messageList, that.messageList) && Objects.equals(folder, that.folder) && password.equals(that.password) && authorities.equals(that.authorities);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, clientFirstName, clientSurName, clientEmail, messageList, folder, password, active, authorities);
+    }
 }
