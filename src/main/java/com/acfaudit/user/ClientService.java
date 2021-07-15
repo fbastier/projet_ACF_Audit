@@ -67,7 +67,7 @@ public class ClientService {
                     c.getId(),
                     c.getClientFirstName(),
                     c.getClientSurName(),
-                    c.getClientEmail(),
+                    c.getEmail(),
                     c.getFolder().getId(),
                     findCollaboraters
                     ));
@@ -101,7 +101,7 @@ public class ClientService {
         Client client = new Client();
         client.setClientFirstName(addClient.getFirstName());
         client.setClientSurName(addClient.getSurName());
-        client.setClientEmail(addClient.getEmail());
+        client.setEmail(addClient.getClientEmail());
         client.setFolder(f);
         client.setMessageList(mL);
         client.setCollaboraterList(cL);

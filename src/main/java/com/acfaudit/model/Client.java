@@ -27,7 +27,7 @@ public class Client implements UserInterface {
 
     @Basic
     @Column(name = "clientEmail")
-    private String clientEmail;
+    private String email;
 
     @OneToMany(mappedBy = "client")
     private List<Message> messageList;
@@ -62,10 +62,10 @@ public class Client implements UserInterface {
     }
 
     // NEEDED FOR AUTHENTICATION CONSTRUCTOR
-    public Client(int id, String clientFirstName, String clientEmail, boolean active, String roles) {
+    public Client(int id, String clientFirstName, String email, boolean active, String roles) {
         this.id = id;
         this.clientFirstName = clientFirstName;
-        this.clientEmail = clientEmail;
+        this.email = email;
         this.active = active;
         this.roles = roles;
     }
@@ -94,12 +94,12 @@ public class Client implements UserInterface {
         this.clientSurName = clientSurName;
     }
 
-    public String getClientEmail() {
-        return clientEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
+    public void setEmail(String clientEmail) {
+        this.email = clientEmail;
     }
 
     public List<Message> getMessageList() {
@@ -155,12 +155,12 @@ public class Client implements UserInterface {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id == client.id && clientFirstName.equals(client.clientFirstName) && clientSurName.equals(client.clientSurName) && clientEmail.equals(client.clientEmail) && messageList.equals(client.messageList) && folder.equals(client.folder) && collaboraterList.equals(client.collaboraterList);
+        return id == client.id && clientFirstName.equals(client.clientFirstName) && clientSurName.equals(client.clientSurName) && email.equals(client.email) && messageList.equals(client.messageList) && folder.equals(client.folder) && collaboraterList.equals(client.collaboraterList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientFirstName, clientSurName, clientEmail, messageList, folder, collaboraterList);
+        return Objects.hash(id, clientFirstName, clientSurName, email, messageList, folder, collaboraterList);
     }
 
     /*@Override
