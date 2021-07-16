@@ -34,7 +34,7 @@ import com.acfaudit.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -65,7 +65,7 @@ public class AuthController {
                 userDetails.getEmail(),
                 roles));
     }
-
+/*
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (clientRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -81,7 +81,7 @@ public class AuthController {
         }
 
         // Create new user's account
-  /*      Client client = new Client(signUpRequest.getUsername(),
+       Client client = new Client(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                // encoder.encode(signUpRequest.getPassword()));
 
@@ -116,8 +116,8 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);*/
+        userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
+    }*/
 }

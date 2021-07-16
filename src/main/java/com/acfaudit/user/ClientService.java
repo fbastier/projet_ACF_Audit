@@ -31,11 +31,11 @@ public class ClientService {
 
 
     // FINDBYEMAIL()
-    public Client findByEmail(String email) {
+    /*public Client findByEmail(String email) {
         Client client = clientRepository.findUserByClientEmail(email);
 
         return client;
-    }
+    }*/
 
 
     // FINDALL()
