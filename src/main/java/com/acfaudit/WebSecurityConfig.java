@@ -20,11 +20,12 @@ import com.acfaudit.security.jwt.AuthEntryPointJwt;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(
         // securedEnabled = true,
         // jsr250Enabled = true,
         prePostEnabled = true)
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
@@ -63,9 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/auth/signin").permitAll().and()
+                //.antMatchers("/").permitAll();
                 .authorizeRequests().antMatchers("/client/*").hasRole("USER")
-                .antMatchers("/").permitAll();
-                //.anyRequest().authenticated();
+
+                .anyRequest().fullyAuthenticated();
 
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

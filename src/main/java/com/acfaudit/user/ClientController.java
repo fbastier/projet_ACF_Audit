@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path="/client")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 
 
@@ -35,13 +35,10 @@ public class ClientController {
 
 
     @GetMapping(path="/all")
-    @CrossOrigin(value = "localhost:4200/client-list")
+    @CrossOrigin(value = "http://localhost:4200/client-list")
     public @ResponseBody List<FindClient> getAllClients() {
-        clientService.findAll();
 
-        List<FindClient> clientResponseList = new ArrayList<FindClient>();
-
-        ArrayList<FindClient> findClients = (ArrayList<FindClient>)clientService.findAll();
+        List<FindClient> findClients = (ArrayList<FindClient>)clientService.findAll();
         System.out.println(findClients);
 
         return findClients;
